@@ -28,7 +28,7 @@ def save_update(update_details):
     messagebox.showinfo("Success", f"Update logged successfully as entry {update_number}.")
 
 def create_gui():
-    def on_submit():
+    def on_submit(event=None):
         details = update_details.get()
         if not details.strip():
             messagebox.showwarning("Input Error", "Please provide update details.")
@@ -51,13 +51,15 @@ def create_gui():
     ).pack(pady=10)
 
     update_details = StringVar()
-    Entry(
+    entry = Entry(
         root, 
         textvariable=update_details, 
         font=("Arial", 12), 
         width=40, 
         bg="lightgrey"
-    ).pack(pady=5)
+    )
+    entry.pack(pady=5)
+    entry.focus_set()
 
     Button(
         root, 
@@ -67,6 +69,8 @@ def create_gui():
         fg="white", 
         font=("Arial", 12, "bold")
     ).pack(pady=20)
+
+    root.bind('<Return>', on_submit)
 
     root.mainloop()
 
